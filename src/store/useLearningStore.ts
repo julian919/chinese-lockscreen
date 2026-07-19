@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { HSK_VOCABULARY, VocabularyWord, getWordsByLevel } from '../data/hskVocabulary';
+import { pushWordToWidget } from '../lib/widget';
 
 export interface CardProgress {
   wordId: string;
@@ -89,6 +90,9 @@ export const useLearningStore = create<LearningState>()(
           currentCardIndex: 0,
           sessionStats: { reviewed: 0, correct: 0, xpEarned: 0 },
         });
+
+        // Surface the first word on the iOS Lock Screen widget (no-op elsewhere).
+        pushWordToWidget(activeQueue[0]);
       },
 
       reviewCard: (wordId, isEasy) => {
@@ -142,7 +146,10 @@ export const useLearningStore = create<LearningState>()(
       nextCard: () => {
         const { currentCardIndex, activeQueue } = get();
         if (currentCardIndex < activeQueue.length) {
-          set({ currentCardIndex: currentCardIndex + 1 });
+          const newIndex = currentCardIndex + 1;
+          set({ currentCardIndex: newIndex });
+          // Keep the Lock Screen widget in sync with the visible card.
+          pushWordToWidget(activeQueue[newIndex]);
         }
       },
 

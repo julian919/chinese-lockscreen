@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "temp-app",
-    "slug": "temp-app",
+    "name": "JuZhi",
+    "slug": "juzhi",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -9,7 +9,13 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.julian.lieow.chineselockscreen",
-      "appleTeamId": "PN2YW82FV8"
+      "appleTeamId": "PN2YW82FV8",
+      "deploymentTarget": "16.0",
+      "entitlements": {
+        "com.apple.security.application-groups": [
+          "group.com.julian.lieow.chineselockscreen"
+        ]
+      }
     },
     "android": {
       "package": "com.julian.lieow.chineselockscreen",
@@ -23,6 +29,10 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-dev-client",
+      "@bacons/apple-targets"
+    ]
   }
 }
