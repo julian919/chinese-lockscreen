@@ -8,7 +8,8 @@
     "userInterfaceStyle": "light",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.julian.lieow.chineselockscreen"
+      "bundleIdentifier": "com.julian.lieow.chineselockscreen",
+      "appleTeamId": "PN2YW82FV8"
     },
     "android": {
       "package": "com.julian.lieow.chineselockscreen",
